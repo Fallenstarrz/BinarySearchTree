@@ -72,9 +72,17 @@ public:
 		root = NULL;
 	}
 	// Insert some data to the tree
-	Node* insert(Node* currentNode, genericType data)
+	Node* insert(Node* currentNode, genericType dataToAdd)
 	{
-
+		// If root == NULL
+		// root = new Node(dataToAdd)
+		// if currentNode == NULL
+		// currentNode = new Node(dataToAdd)
+		// if dataToAdd < currentNode->data
+		// insert(currentNode->left, dataToAdd)
+		// if dataToAdd > currentNode->data
+		// insert(currentNode->right, dataToAdd)
+		// 
 	}
 	// Delete some data from the tree & Restructure tree accordingly
 	Node* destroy(Node* currentNode, genericType dataToDestroy)
