@@ -63,7 +63,7 @@ class Tree
 {
 private:
 	// Attributes
-	Node * root;
+	Node<genericType> * root;
 public:
 	// Methods
 	// Constructor
@@ -72,7 +72,31 @@ public:
 		root = NULL;
 	}
 	// Insert some data to the tree
-	void insert(Node* currentNode, genericType dataToAdd)
+	void insert(genericType dataToAdd)
+	{
+		auto currentNode = root;
+		if (root == NULL)
+		{
+			root = new Node<genericType>(dataToAdd);
+		}
+		else if (currentNode == NULL)
+		{
+			currentNode = new Node<genericType>(dataToAdd);
+		}
+		else if (currentNode->getData() == dataToAdd)
+		{
+			currentNode;
+		}
+		else if (dataToAdd < currentNode->getData())
+		{
+			insert(currentNode->getLeft(), dataToAdd);
+		}
+		else if (dataToAdd > currentNode->getData())
+		{
+			insert(currentNode->getRight(), dataToAdd);
+		}
+	}
+	void insert(Node<genericType>* currentNode, genericType dataToAdd)
 	{
 		if (root == NULL)
 		{
@@ -82,21 +106,21 @@ public:
 		{
 			currentNode = new Node<genericType>(dataToAdd);
 		}
-		else if (currentNode->data == dataToAdd)
+		else if (currentNode->getData() == dataToAdd)
 		{
 			currentNode;
 		}
-		else if (dataToAdd < currentNode->data)
+		else if (dataToAdd < currentNode->getData())
 		{
-			insert(currentNode->left, dataToAdd);
+			insert(currentNode->getLeft(), dataToAdd);
 		}
-		else if (dataToAdd > currentNode->data)
+		else if (dataToAdd > currentNode->getData())
 		{
-			insert(currentNode->right, dataToAdd);
+			insert(currentNode->getRight(), dataToAdd);
 		}
 	}
 	// Delete some data from the tree & Restructure tree accordingly
-	Node* destroy(Node* currentNode, genericType dataToDestroy)
+	Node<genericType>* destroy(Node<genericType>* currentNode, genericType dataToDestroy)
 	{
 		// 1. Leaf node 
 		//    Just delete
@@ -106,29 +130,49 @@ public:
 		//	  The child replaces the parent
 	}
 	// Find maximum value in tree
-	genericType maximum(Node* currentNode)
+	genericType maximum(Node<genericType>* currentNode)
 	{
 
 	}
 
 	// Find data in tree
-	genericType find(Node* currentNode, genericType valueToFind)
+	genericType find(genericType valueToFind)
+	{
+		auto currentNode = root;
+		if (currentNode == NULL)
+		{
+			return false;
+		}
+		else if (currentNode->getData() == valueToFind)
+		{
+			return currentNode;
+		}
+		else if (valueToFind < currentNode->getData())
+		{
+			return(find(currentNode->getLeft(), valueToFind));
+		}
+		else
+		{
+			return (find(currentNode->getRight(), valueToFind));
+		}
+	}
+	genericType find(Node<genericType>* currentNode, genericType valueToFind)
 	{
 		if (currentNode == NULL)
 		{
 			return false;
 		}
-		else if(currentNode->data == valueToFind)
+		else if(currentNode->getData() == valueToFind)
 		{
 			return currentNode;
 		}
-		else if (valueToFind < currentNode->data)
+		else if (valueToFind < currentNode->getData())
 		{
-			return(find(currentNode->left, valueToFind));
+			return(find(currentNode->getLeft(), valueToFind));
 		}
 		else
 		{
-			return (find(currentNode->right, valueToFind));
+			return (find(currentNode->getRight(), valueToFind));
 		}
 	}
 
