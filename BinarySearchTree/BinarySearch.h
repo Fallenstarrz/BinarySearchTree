@@ -76,19 +76,25 @@ public:
 	{
 		if (root == NULL)
 		{
-			root = new Node(dataToAdd)
+			root = new Node(dataToAdd);
+			return root;
 		}
 		if (currentNode == NULL)
 		{
-			currentNode = new Node(dataToAdd)
+			currentNode = new Node(dataToAdd);
+			return currentNode;
+		}
+		if (currentNode->data == dataToAdd)
+		{
+			return currentNode;
 		}
 		if (dataToAdd < currentNode->data)
 		{
-			insert(currentNode->left, dataToAdd)
+			return insert(currentNode->left, dataToAdd);
 		}
 		if (dataToAdd > currentNode->data)
 		{
-			insert(currentNode->right, dataToAdd)
+			return insert(currentNode->right, dataToAdd);
 		}
 	}
 	// Delete some data from the tree & Restructure tree accordingly
