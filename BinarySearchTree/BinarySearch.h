@@ -72,29 +72,27 @@ public:
 		root = NULL;
 	}
 	// Insert some data to the tree
-	Node* insert(Node* currentNode, genericType dataToAdd)
+	void insert(Node* currentNode, genericType dataToAdd)
 	{
 		if (root == NULL)
 		{
-			root = new Node(dataToAdd);
-			return root;
+			root = new Node<genericType>(dataToAdd);
 		}
-		if (currentNode == NULL)
+		else if (currentNode == NULL)
 		{
-			currentNode = new Node(dataToAdd);
-			return currentNode;
+			currentNode = new Node<genericType>(dataToAdd);
 		}
-		if (currentNode->data == dataToAdd)
+		else if (currentNode->data == dataToAdd)
 		{
-			return currentNode;
+			currentNode;
 		}
-		if (dataToAdd < currentNode->data)
+		else if (dataToAdd < currentNode->data)
 		{
-			return insert(currentNode->left, dataToAdd);
+			insert(currentNode->left, dataToAdd);
 		}
-		if (dataToAdd > currentNode->data)
+		else if (dataToAdd > currentNode->data)
 		{
-			return insert(currentNode->right, dataToAdd);
+			insert(currentNode->right, dataToAdd);
 		}
 	}
 	// Delete some data from the tree & Restructure tree accordingly
@@ -111,11 +109,6 @@ public:
 	genericType maximum(Node* currentNode)
 	{
 
-	}
-
-	Node* createNewNode(genericType dataToAdd)
-	{
-		
 	}
 
 	// Find data in tree
