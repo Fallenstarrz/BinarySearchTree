@@ -43,11 +43,11 @@ public:
 		return data;
 	}
 	// Setters
-	void setLeft(Node & newLeft)
+	void setLeft(Node * newLeft)
 	{
 		left = newLeft;
 	}
-	void setRight(Node & newRight)
+	void setRight(Node * newRight)
 	{
 		right = newRight;
 	}
@@ -75,48 +75,74 @@ public:
 	void insert(genericType dataToAdd)
 	{
 		auto currentNode = root;
+		// if no root exists
 		if (root == NULL)
 		{
 			root = new Node<genericType>(dataToAdd);
 		}
-		else if (currentNode == NULL)
-		{
-			currentNode = new Node<genericType>(dataToAdd);
-		}
-		else if (currentNode->getData() == dataToAdd)
-		{
-			currentNode;
-		}
-		else if (dataToAdd < currentNode->getData())
-		{
-			insert(currentNode->getLeft(), dataToAdd);
-		}
+		// if greater than
 		else if (dataToAdd > currentNode->getData())
 		{
-			insert(currentNode->getRight(), dataToAdd);
+			if (currentNode->getRight() == nullptr)
+			{
+				Node<genericType>* nodeToAdd = new Node <genericType>(dataToAdd);
+				currentNode->setRight(nodeToAdd);
+			}
+			else 
+			{
+				this->insert(currentNode, dataToAdd);
+			}
+		}
+		// if less than
+		else if (dataToAdd < currentNode->getData())
+		{
+			if (currentNode->getLeft() == nullptr)
+			{
+				Node<genericType>* nodeToAdd = new Node <genericType>(dataToAdd);
+				currentNode->setLeft(nodeToAdd);
+			}
+			else
+			{
+				this->insert(currentNode->getLeft(), dataToAdd);
+			}
+		}
+		// throw error, because node already exists
+		else if (currentNode->getData() == dataToAdd)
+		{
+			// This should throw an error, because it is already in the table
 		}
 	}
 	void insert(Node<genericType>* currentNode, genericType dataToAdd)
 	{
-		if (root == NULL)
+		if (dataToAdd > currentNode->getData())
 		{
-			root = new Node<genericType>(dataToAdd);
+			if (dataToAdd > currentNode->getData())
+			{
+				Node<genericType>* nodeToAdd = new Node <genericType>(dataToAdd);
+				currentNode->setRight(nodeToAdd);
+			}
+			else
+			{
+				insert(currentNode, dataToAdd);
+			}
 		}
-		else if (currentNode == NULL)
-		{
-			currentNode = new Node<genericType>(dataToAdd);
-		}
-		else if (currentNode->getData() == dataToAdd)
-		{
-			currentNode;
-		}
+		// if less than
 		else if (dataToAdd < currentNode->getData())
 		{
-			insert(currentNode->getLeft(), dataToAdd);
+			if (currentNode->getLeft() == nullptr)
+			{
+				Node<genericType>* nodeToAdd = new Node <genericType>(dataToAdd);
+				currentNode->setLeft(nodeToAdd);
+			}
+			else
+			{
+				insert(currentNode->getLeft(), dataToAdd);
+			}
 		}
-		else if (dataToAdd > currentNode->getData())
+		// throw error, because node already exists
+		else if (currentNode->getData() == dataToAdd)
 		{
-			insert(currentNode->getRight(), dataToAdd);
+			// This should throw an error, because it is already in the table
 		}
 	}
 	// Delete some data from the tree & Restructure tree accordingly
