@@ -165,40 +165,64 @@ public:
 	genericType find(genericType valueToFind)
 	{
 		auto currentNode = root;
-		if (currentNode == NULL)
-		{
-			return false;
-		}
-		else if (currentNode->getData() == valueToFind)
+		if (valueToFind == currentNode->getData())
 		{
 			return currentNode;
 		}
+		else if (valueToFind > currentNode->getData())
+		{
+			if (currentNode->getRight() == nullptr)
+			{
+				// NOT FOUND
+				// return nullptr;
+			}
+			else
+			{
+				find(currentNode->getRight(), valueToFind)
+			}
+		}
 		else if (valueToFind < currentNode->getData())
 		{
-			return(find(currentNode->getLeft(), valueToFind));
-		}
-		else
-		{
-			return (find(currentNode->getRight(), valueToFind));
+			if (currentNode->getLeft() == nullptr)
+			{
+				// NOT FOUND
+				// return nullptr;
+			}
+			else
+			{
+				find(currentNode->getLeft(), valueToFind)
+			}
 		}
 	}
 	genericType find(Node<genericType>* currentNode, genericType valueToFind)
 	{
-		if (currentNode == NULL)
-		{
-			return false;
-		}
-		else if(currentNode->getData() == valueToFind)
+		if (valueToFind == currentNode->getData())
 		{
 			return currentNode;
 		}
+		else if (valueToFind > currentNode->getData())
+		{
+			if (currentNode->getRight() == nullptr)
+			{
+				// NOT FOUND
+				// return nullptr;
+			}
+			else
+			{
+				find(currentNode->getRight(), valueToFind)
+			}
+		}
 		else if (valueToFind < currentNode->getData())
 		{
-			return(find(currentNode->getLeft(), valueToFind));
-		}
-		else
-		{
-			return (find(currentNode->getRight(), valueToFind));
+			if (currentNode->getLeft() == nullptr)
+			{
+				// NOT FOUND
+				// return nullptr;
+			}
+			else
+			{
+				find(currentNode->getLeft(), valueToFind)
+			}
 		}
 	}
 
