@@ -114,6 +114,7 @@ public:
 	}
 	void insert(Node<genericType>* currentNode, genericType dataToAdd)
 	{
+		// if greater than
 		if (dataToAdd > currentNode->getData())
 		{
 			if (dataToAdd > currentNode->getData())
@@ -162,7 +163,7 @@ public:
 	}
 
 	// Find data in tree
-	genericType find(genericType valueToFind)
+	Node <genericType>* find(genericType valueToFind)
 	{
 		auto currentNode = root;
 		if (valueToFind == currentNode->getData())
@@ -178,7 +179,7 @@ public:
 			}
 			else
 			{
-				find(currentNode->getRight(), valueToFind)
+				find(currentNode->getRight(), valueToFind);
 			}
 		}
 		else if (valueToFind < currentNode->getData())
@@ -190,11 +191,11 @@ public:
 			}
 			else
 			{
-				find(currentNode->getLeft(), valueToFind)
+				find(currentNode->getLeft(), valueToFind);
 			}
 		}
 	}
-	genericType find(Node<genericType>* currentNode, genericType valueToFind)
+	Node <genericType>* find(Node<genericType>* currentNode, genericType valueToFind)
 	{
 		if (valueToFind == currentNode->getData())
 		{
@@ -209,7 +210,7 @@ public:
 			}
 			else
 			{
-				find(currentNode->getRight(), valueToFind)
+				find(currentNode->getRight(), valueToFind);
 			}
 		}
 		else if (valueToFind < currentNode->getData())
@@ -221,7 +222,7 @@ public:
 			}
 			else
 			{
-				find(currentNode->getLeft(), valueToFind)
+				find(currentNode->getLeft(), valueToFind);
 			}
 		}
 	}
