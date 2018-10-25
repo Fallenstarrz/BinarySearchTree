@@ -90,7 +90,7 @@ public:
 			}
 			else 
 			{
-				this->insert(currentNode, dataToAdd);
+				insert(currentNode->getRight(), dataToAdd);
 			}
 		}
 		// if less than
@@ -103,7 +103,7 @@ public:
 			}
 			else
 			{
-				this->insert(currentNode->getLeft(), dataToAdd);
+				insert(currentNode->getLeft(), dataToAdd);
 			}
 		}
 		// throw error, because node already exists
@@ -117,14 +117,14 @@ public:
 		// if greater than
 		if (dataToAdd > currentNode->getData())
 		{
-			if (dataToAdd > currentNode->getData())
+			if (currentNode->getRight() == nullptr)
 			{
 				Node<genericType>* nodeToAdd = new Node <genericType>(dataToAdd);
 				currentNode->setRight(nodeToAdd);
 			}
 			else
 			{
-				insert(currentNode, dataToAdd);
+				insert(currentNode->getRight(), dataToAdd);
 			}
 		}
 		// if less than
@@ -152,9 +152,14 @@ public:
 		// 1. Leaf node 
 		//    Just delete
 		// 2. A node that has both left and right children
-		//	  Replace the node with it's predecessor
+		//	  Search for next highest node and replace it
+		//	  Next highest node is the first right node that doesn't have a left child
 		// 3. A node that has only one child
 		//	  The child replaces the parent
+		// 4. Tree is empty
+		//	  Error, tree is empty
+		// 5. Delete Root Node
+		//	 Replace trees root with new node
 	}
 	// Find maximum value in tree
 	genericType maximum(Node<genericType>* currentNode)
