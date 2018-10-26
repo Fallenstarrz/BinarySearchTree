@@ -8,8 +8,8 @@ class Node
 private:
 	// Attributes
 	genericType data;
-	Node* left = NULL;
-	Node* right = NULL;
+	Node* left = nullptr;
+	Node* right = nullptr;
 public:
 	// Methods
 	// Constructors
@@ -25,8 +25,8 @@ public:
 	// Deconstructors
 	~Node()
 	{
-		left = NULL;
-		right = NULL;
+		left = nullptr;
+		right = nullptr;
 	}
 
 	// Getters
@@ -69,14 +69,14 @@ public:
 	// Constructor
 	Tree()
 	{
-		root = NULL;
+		root = nullptr;
 	}
 	// Insert some data to the tree
 	void insert(genericType dataToAdd)
 	{
 		auto currentNode = root;
 		// if no root exists
-		if (root == NULL)
+		if (root == nullptr)
 		{
 			root = new Node<genericType>(dataToAdd);
 		}
@@ -162,10 +162,29 @@ public:
 		//	 Replace trees root with new node
 	}
 	// Find maximum value in tree
-	genericType maximum(Node<genericType>* currentNode)
+	Node<genericType>* maximum()
 	{
-
+		auto currentNode = root;
+		if (currentNode->getRight() == nullptr)
+		{
+			return currentNode;
+		}
+		else
+		{
+			maximum(currentNode->getRight());
+		}
 	}
+	Node<genericType>* maximum(Node<genericType>* currentNode)
+	{
+		if (currentNode->getRight() == nullptr)
+		{
+			return currentNode;
+		}
+		else
+		{
+			maximum(currentNode->getRight());
+		}
+	}	
 
 	// Find data in tree
 	Node <genericType>* find(genericType valueToFind)
@@ -180,7 +199,7 @@ public:
 			if (currentNode->getRight() == nullptr)
 			{
 				// NOT FOUND
-				// return nullptr;
+				return nullptr;
 			}
 			else
 			{
@@ -192,7 +211,7 @@ public:
 			if (currentNode->getLeft() == nullptr)
 			{
 				// NOT FOUND
-				// return nullptr;
+				return nullptr;
 			}
 			else
 			{
@@ -211,7 +230,7 @@ public:
 			if (currentNode->getRight() == nullptr)
 			{
 				// NOT FOUND
-				// return nullptr;
+				return nullptr;
 			}
 			else
 			{
@@ -223,7 +242,7 @@ public:
 			if (currentNode->getLeft() == nullptr)
 			{
 				// NOT FOUND
-				// return nullptr;
+				return nullptr;
 			}
 			else
 			{
